@@ -46,8 +46,7 @@ public class UtilitatsXifrar {
             encryptedData =  cipher.doFinal(data);
         } catch (Exception  ex) {
             System.err.println("Error xifrant les dades: " + ex);
-        }
-        return encryptedData;
+        }return encryptedData;
     }
 
     public static byte[] decryptData(SecretKey sKey, byte[] encryptedData) {
@@ -58,6 +57,17 @@ public class UtilitatsXifrar {
             decryptedData = cipher.doFinal(encryptedData);
         } catch (Exception ex) {
             System.err.println("Error desxifrant les dades: " + ex);
+        }
+        return decryptedData;
+    }
+
+    public static byte[] decryptDataSinException(SecretKey sKey, byte[] encryptedData) {
+        byte[] decryptedData = null;
+        try {
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.DECRYPT_MODE, sKey);
+            decryptedData = cipher.doFinal(encryptedData);
+        } catch (Exception ex) {
         }
         return decryptedData;
     }
